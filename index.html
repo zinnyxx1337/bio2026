@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>zinnyxxxxx - bio</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: #d6daf0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #000;
+  }
+
+  #topbar {
+    background: #800000;
+    color: #fff;
+    padding: 2px 6px;
+    font-size: 11px;
+    border-bottom: 2px solid #500000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  #topbar a { color: #ffaaaa; text-decoration: none; }
+  #topbar a:hover { text-decoration: underline; }
+  #topbar .sep { color: #aaa; }
+
+  #boardtitle {
+    background: #d6daf0;
+    border-bottom: 1px solid #b7c5d9;
+    padding: 6px 8px 4px 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  #boardtitle .logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #800000;
+    font-family: 'Times New Roman', serif;
+    letter-spacing: -1px;
+  }
+  #boardtitle .boardname {
+    font-size: 14px;
+    color: #444;
+    font-style: italic;
+  }
+
+  #main {
+    max-width: 860px;
+    margin: 10px auto;
+    padding: 0 8px;
+  }
+
+  .thread { margin-bottom: 12px; }
+
+  .post-header {
+    background: #d6daf0;
+    padding: 2px 0;
+    margin-bottom: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .post-name     { color: #117743; font-weight: bold; font-size: 13px; }
+  .post-tripcode { color: #228855; font-size: 12px; }
+  .post-date     { color: #555; font-size: 11px; }
+  .post-num      { color: #800000; font-size: 11px; font-weight: bold; cursor: pointer; }
+  .post-num:hover { text-decoration: underline; }
+  .post-subject  { color: #0f0c5d; font-weight: bold; font-size: 14px; }
+
+  .post-box {
+    background: #d6daf0;
+    border: 1px solid #b7c5d9;
+    display: inline-flex;
+    gap: 10px;
+    padding: 6px 8px;
+    max-width: 100%;
+  }
+
+  .avatar-wrap { flex-shrink: 0; }
+  .avatar-wrap img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 2px solid #800000;
+    display: block;
+  }
+  .avatar-filename {
+    font-size: 9px;
+    color: #555;
+    text-align: center;
+    margin-top: 1px;
+    max-width: 100px;
+    word-break: break-all;
+  }
+
+  .post-content { flex: 1; min-width: 0; }
+
+  .post-text {
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .greentext { color: #789922; }
+  .quote     { color: #34345c; font-weight: bold; }
+
+  .post-text a { color: #34345c; text-decoration: underline; }
+  .post-text a:hover { color: #d00; }
+
+  .replies {
+    margin-left: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
+  }
+
+  .reply {
+    background: #eef2ff;
+    border: 1px solid #b7c5d9;
+    padding: 5px 8px;
+    display: inline-block;
+    max-width: 620px;
+  }
+  .reply .post-header { background: transparent; margin-bottom: 1px; }
+
+  .projects-table { border-collapse: collapse; margin-top: 6px; font-size: 12px; }
+  .projects-table td, .projects-table th {
+    border: 1px solid #b7c5d9;
+    padding: 3px 10px;
+  }
+  .projects-table th {
+    background: #c0c8e8;
+    font-weight: bold;
+    color: #0f0c5d;
+    text-align: left;
+  }
+  .projects-table tr:nth-child(odd) td  { background: #d6daf0; }
+  .projects-table tr:nth-child(even) td { background: #c8d0ea; }
+  .projects-table a { color: #34345c; text-decoration: underline; }
+  .projects-table a:hover { color: #d00; }
+
+  .tag {
+    background: #800000;
+    color: #fff;
+    font-size: 10px;
+    padding: 0 4px;
+    border-radius: 2px;
+    margin-right: 2px;
+    font-weight: bold;
+  }
+
+  .online-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    background: #00cc00;
+    border-radius: 50%;
+    margin-right: 3px;
+    box-shadow: 0 0 4px #00cc00;
+  }
+
+  @keyframes blink {
+    0%,100% { opacity: 1; }
+    50%      { opacity: 0.2; }
+  }
+  .blink { animation: blink 1.4s infinite; }
+
+  .page-nav { font-size: 12px; color: #555; margin-bottom: 6px; }
+  .page-nav span { color: #800000; font-weight: bold; }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid #b7c5d9;
+    margin: 6px 0;
+  }
+
+  /* comment form */
+  .comment-form-wrap {
+    margin-top: 14px;
+    margin-left: 0;
+  }
+  .comment-form-title {
+    font-weight: bold;
+    color: #800000;
+    font-size: 13px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #b7c5d9;
+    padding-bottom: 2px;
+  }
+  .comment-form-box {
+    background: #eef2ff;
+    border: 1px solid #b7c5d9;
+    padding: 8px 10px;
+    display: inline-block;
+    min-width: 340px;
+    max-width: 100%;
+  }
+  .comment-form-box table { font-size: 12px; width: 100%; }
+  .comment-form-box td { padding: 3px 4px; vertical-align: top; }
+  .comment-form-box td:first-child { white-space: nowrap; color: #555; width: 70px; }
+  .comment-form-box input[type=text] {
+    border: 1px solid #999;
+    background: #fff;
+    font-size: 12px;
+    padding: 2px 4px;
+    width: 200px;
+  }
+  .comment-form-box textarea {
+    border: 1px solid #999;
+    background: #fff;
+    font-size: 12px;
+    padding: 3px;
+    width: 300px;
+    height: 70px;
+    resize: vertical;
+    font-family: Arial;
+  }
+  .comment-form-box input[type=submit] {
+    background: #c0c8e8;
+    border: 1px solid #888;
+    padding: 2px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 4px;
+  }
+  .comment-form-box input[type=submit]:hover { background: #a0a8d0; }
+  .form-hint { font-size: 10px; color: #888; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <a href="#">Home</a>
+  <span class="sep">/</span>
+  <a href="#">b/</a>
+  <span class="sep">/</span>
+  <a href="#">lua/</a>
+  <span class="sep">/</span>
+  <a href="#">hvh/</a>
+  <span class="sep">/</span>
+  <a href="#">mantage/</a>
+  &nbsp;&nbsp;
+  <span style="color:#ffaaaa;">[ zinnyxxxxx — official page ]</span>
+  <a href="#" style="margin-left:auto;">[ Settings ]</a>
+</div>
+
+<div id="boardtitle">
+  <div class="logo">&#x2605; 8chann</div>
+</div>
+
+<div id="main">
+
+  <div class="page-nav">
+    [ <span>1</span> ] [ <a href="#">2</a> ] [ <a href="#">3</a> ]
+    &nbsp;—&nbsp; Thread: <span>#3381488</span>
+    &nbsp;—&nbsp;
+    <span class="blink online-dot"></span><span style="color:#00aa00;font-weight:bold;">online</span>
+  </div>
+
+  <div class="thread">
+
+    <!-- OP -->
+    <div class="post-header">
+      <span class="post-subject">ZINNYXXXXX — BIO THREAD [OFFICIAL]</span>
+      &nbsp;
+      <span class="post-name">zinnyxxxxx</span>
+      <span class="post-tripcode">!ZiNNY.xXxX</span>
+      &nbsp;
+      <span class="post-date">Mon 11 May 2026 19:04:33</span>
+      &nbsp;
+      <span class="post-num">&gt;&gt;3381488</span>
+      &nbsp;
+      <span class="tag">OP</span>
+      <span class="tag">DEV</span>
+      <span class="tag">HVH</span>
+    </div>
+
+    <div class="post-box">
+      <div class="avatar-wrap">
+        <img src="https://i.pinimg.com/736x/14/24/18/1424188cc1d2d41908c18a3c47e13596.jpg"
+             alt="avatar"
+             onerror="this.style.background='#555';this.alt='[img]';">
+        <div class="avatar-filename">zinnyxxxxx.jpg<br>100x100</div>
+      </div>
+
+      <div class="post-content">
+        <div class="post-text"><span class="greentext">&gt;wspp, lua or mantage dude</span>
+
+My projects:
+
+<table class="projects-table">
+  <tr>
+    <th>#</th><th>Project</th><th>Type</th><th>Status</th>
+  </tr>
+  <tr>
+    <td>01</td>
+    <td><a href="#">andrenaliine.webz</a></td>
+    <td>web / site</td>
+    <td style="color:green;font-weight:bold;">active</td>
+  </tr>
+  <tr>
+    <td>02</td>
+    <td><a href="#">Z-City HvH Collection</a></td>
+    <td>hvh / cfg</td>
+    <td style="color:green;font-weight:bold;">active</td>
+  </tr>
+  <tr>
+    <td>03</td>
+    <td><a href="#">KPOBb.lua</a></td>
+    <td>lua script</td>
+    <td style="color:#cc8800;font-weight:bold;">wip</td>
+  </tr>
+  <tr>
+    <td>04</td>
+    <td><a href="#">Pastuh RP Collection</a></td>
+    <td>rp / pack</td>
+    <td style="color:green;font-weight:bold;">active</td>
+  </tr>
+</table>
+
+<hr class="divider">
+<span class="greentext">&gt;dm for collab</span>
+<span class="greentext">&gt;don't be a faggot</span></div>
+      </div>
+    </div>
+
+    <!-- replies -->
+    <div class="replies" id="replies-list"></div>
+
+  </div><!-- /thread -->
+
+  <div class="comment-form-title" style="margin-top:14px;">[ Post a Reply ]</div>
+  <div class="comment-form-box">
+    <table>
+      <tr>
+        <td>Name</td>
+        <td><input type="text" id="c-name" placeholder="Anonymous" maxlength="30"></td>
+      </tr>
+      <tr>
+        <td>Comment</td>
+        <td>
+          <textarea id="c-text" placeholder="Type here... Lines starting with > become greentext"></textarea>
+          <div class="form-hint">&gt;text = greentext</div>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="submit" value="Post" onclick="postComment()"></td>
+      </tr>
+    </table>
+  </div>
+
+</div><!-- /main -->
+
+<div id="footer" style="text-align:center;font-size:11px;color:#666;padding:10px;border-top:1px solid #b7c5d9;margin-top:10px;">
+  [ <a href="#">Return</a> ] [ <a href="#">Catalog</a> ] [ <a href="#">Top</a> ]
+  &nbsp;&nbsp;
+  <span style="color:#999;">— zinnyxxxxx.bio — imageboard engine v2.4 —</span>
+</div>
+
+<script>
+  // seed post counter
+  var postCounter = 3381500;
+
+  function formatText(raw) {
+    var lines = raw.split('\n');
+    var out = '';
+    lines.forEach(function(line) {
+      if (line.startsWith('>')) {
+        out += '<span class="greentext">' + escHtml(line) + '</span>\n';
+      } else {
+        out += escHtml(line) + '\n';
+      }
+    });
+    return out.trim();
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function nowStr() {
+    var d = new Date();
+    var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var pad = function(n){ return n < 10 ? '0'+n : n; };
+    return days[d.getDay()] + ' ' + pad(d.getDate()) + ' ' + months[d.getMonth()] + ' ' + d.getFullYear()
+      + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+  }
+
+  function postComment() {
+    var nameVal = document.getElementById('c-name').value.trim() || 'Anonymous';
+    var textVal = document.getElementById('c-text').value.trim();
+    if (!textVal) { alert('Поле комментария пустое!'); return; }
+
+    postCounter++;
+    var num = postCounter;
+
+    var repliesDiv = document.getElementById('replies-list');
+
+    var div = document.createElement('div');
+    div.className = 'reply';
+    div.id = 'p' + num;
+
+    var isOp = (nameVal.toLowerCase() === 'zinnyxxxxx');
+    var tripHtml = isOp ? ' <span class="post-tripcode">!ZiNNY.xXxX</span>' : '';
+    var tagHtml  = isOp ? ' <span class="tag">OP</span>' : '';
+
+    div.innerHTML =
+      '<div class="post-header">' +
+        '<span class="post-name">' + escHtml(nameVal) + '</span>' +
+        tripHtml +
+        ' &nbsp; ' +
+        '<span class="post-date">' + nowStr() + '</span>' +
+        ' &nbsp; ' +
+        '<span class="post-num" onclick="quotePost(' + num + ')">&gt;&gt;' + num + '</span>' +
+        tagHtml +
+      '</div>' +
+      '<div class="post-text">' + formatText(textVal) + '</div>';
+
+    repliesDiv.appendChild(div);
+
+    document.getElementById('c-name').value = '';
+    document.getElementById('c-text').value = '';
+
+    div.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function quotePost(num) {
+    var ta = document.getElementById('c-text');
+    ta.value += '>>' + num + '\n';
+    ta.focus();
+  }
+</script>
+</body>
+</html>
